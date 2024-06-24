@@ -1,30 +1,69 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://jakarta.apache.org/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<h2>Scripting Tag</h2>
-	<!-- ¼±¾ð¹® ÅÂ±×¸¦ »ç¿ëÇÏ¿© ÀÚ¹Ù º¯¼ö¿Í ¸Þ¼Òµå Á¤ÀÇ -->
+	<!-- ì„ ì–¸ë¬¸ íƒœê·¸ë¥¼ ì‚¬ìš©í•˜ì—¬ ìžë°” ë³€ìˆ˜ì™€ ë©”ì†Œë“œ ì •ì˜ -->
 	<%! 
-	int count = 3; 
+	int count = 9; 
 	
 	String makeItLower(String data) {
 		return data.toLowerCase();
 	}
-	%>
 	
-	<!-- ½ºÅ©¸³Æ²¸´ ÅÂ±×·Î ÀÚ¹Ù ·ÎÁ÷ ÄÚµå ÀÛ¼º  -->
+	
+	%>
+	<!-- <c:out value="Hello World!!" /> --> 
+	
+	<%-- <table border="1">
+        <c:forEach var="i" begin="1" end="9">
+            <tr>
+                <c:forEach var="j" begin="1" end="9">
+                    <td><c:out value="${i}"/> x <c:out value="${j}"/> = <c:out value="${i * j}"/></td>
+                </c:forEach>
+            </tr>
+        </c:forEach>
+    </table> --%>
+    
+    <table border="1">
+        <c:forEach var="i" begin="1" end="9">
+            <tr>
+                <c:forEach var="j" begin="1" end="9">
+                    <td>${i} * ${j} = ${i * j}</td>
+                </c:forEach>
+            </tr>
+        </c:forEach>
+    </table>
+	
+	<%-- <!-- ìŠ¤í¬ë¦½í‹€ë¦¿ íƒœê·¸ë¡œ ìžë°” ë¡œì§ ì½”ë“œ ìž‘ì„±  -->
+	<c:forEach var="i" begin="1" end="5" step="1" varStatus="status">
+		<c:forEach var="j" begin="1" end="9" step="1" varStatus="status">
+		${i} * ${j} = ${i * j} <br>
+		ì•ˆë…•í•˜ì„¸ìš” ${j}
+		</c:forEach>
+	</c:forEach> --%>
+	
+	<%-- <c:forEach var="S" begin="0" end="6">
+	<c:out value="${S}"/>
+	</c:forEach> --%>
+	
 	<%
-	for (int i=1; i<= count; i++) {
-		out.println("Java Server Pages " + i + ".<br>");
-	}
-	%>
+	for (int i=2; i<= count; i++) {
+		for (int j=1; j< count; j++) {
+			out.println(i + " * " + j + " = " + i*j); %> <br>
+			
+		<%} %>
+		<br>
+	<%}	%>
 	
-	<!-- Ç¥Çö¹® ÅÂ±×·Î ¼±¾ð¹®ÀÇ ¸Þ¼Òµå¸¦ È£ÃâÇÏ¿© ¹®ÀÚ¿­ ÇüÅÂ·Î Ãâ·Â -->
-	<%= makeItLower("Hello World") %>
+	<!-- í‘œí˜„ë¬¸ íƒœê·¸ë¡œ ì„ ì–¸ë¬¸ì˜ ë©”ì†Œë“œë¥¼ í˜¸ì¶œí•˜ì—¬ ë¬¸ìžì—´ í˜•íƒœë¡œ ì¶œë ¥ -->
+	<%= makeItLower("Hello World")%> <br>
+	<%= makeItLower("This is new JSP Code") %>
 </body>
 </html>
